@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Log Test Page</title>
+  <style>
+    body { font-family: monospace; padding: 2rem; background: #f0f0f0; }
+    #output { white-space: pre-wrap; margin-top: 1rem; background: #fff; padding: 1rem; border-radius: 8px; border: 1px solid #ccc; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>📤 Test Run Scripts Endpoint</h2>
+
+  <label>Course Name: <input id="courseName" value="Test Course" /></label><br>
+  <label>Course Date: <input id="courseDate" value="2025-04-10" /></label><br>
+  <button onclick="runScripts()">Run Scripts</button>
+
+  <div id="output"></div>
+
+  <script>
+    async function runScripts() {
+      const output = document.getElementById("output");
+      output.textContent = "⏳ Running scripts...";
+
+      const payload = {
+        course_name: document.getElementById("courseName").value,
+        course_date: document.getElementById("courseDate").value
+      };
+
+      try {
+        const response = await fetch("/run_scripts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(`HTTP ${response.status}: ${errText}`);
+        }
+
+        const result = await response.json();
+        let display = "";
+
+        if (result.logs) {
+          display += result.logs.join("\n") + "\n";
+        }
+
+        if (result.log_path) {
+          display += `\n📥 Log File: ${result.log_path}\n`;
+
+          const link = document.createElement("a");
+          link.href = result.log_path;
+          link.textContent = "📥 Download Log File";
+          link.download = "";
+          link.style.display = "block";
+          link.style.marginTop = "1rem";
+          output.appendChild(link);
+        }
+
+        output.textContent = display;
+      } catch (err) {
+        output.textContent = "❌ Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

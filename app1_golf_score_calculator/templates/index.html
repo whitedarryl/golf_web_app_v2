@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Golf Score Calculator</title>
+  <style>
+html, body { overflow-x: hidden; max-width: 100%; }
+.scorecard { max-width: 100%; overflow-x: auto; }
+    #adminToggle {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Satisfy&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/scorecard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/awesomplete.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <style>
+    body {
+      animation: fadeInBg 1.5s ease-in;
+    }
+
+    @keyframes fadeInBg {
+      from {
+        background-color: #fff;
+        opacity: 0.2;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    #runScriptsBtn {
+      margin-top: 1rem;
+    }
+
+    #tourneyRunner {
+      text-align: center;
+    }
+
+    .home-button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .form-inputs {
+      margin-top: 2rem;
+    }
+
+    #output {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background: #eefcef;
+      font-family: 'Patrick Hand SC', cursive;
+      white-space: pre-line;
+    }
+
+    #spinner {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<script>
+  const SUBMIT_URL = "{{ url_for('score_calc.submit_score') }}";
+</script>
+
+<body style="
+  background-image: url('{{ url_for('static', filename='images/scorecard-bg.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+">
+
+  <div class="scorecard">
+    <h1>🏌️ Tony G's {{ course_name }} Tournament</h1>
+    {% if course_date %}
+      <p class="course-date">{{ course_date }}</p>
+    {% endif %}
+
+    <div class="player-row">
+      <form id="playerForm" onsubmit="return false;">
+        <label for="playerName">Player:</label>
+        <input id="playerName" class="awesomplete" autocomplete="off" placeholder="Start typing a name..." />
+        <span id="progress" class="progress-text">
+          <span id="submittedPlayers">{{ submitted_count }}</span> of 
+          <span id="totalPlayers">{{ total_count }}</span> players submitted |
+          <strong class="players-left">✔️ {{ players_left }} left</strong>
+        </span>      
+        <div id="progress-bar"></div>
+      </form>
+    </div>    
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Hole</th>
+          {% for i in range(1, 10) %}<th>{{ i }}</th>{% endfor %}
+          <th>OUT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Score</td>
+          {% for i in range(1, 10) %}
+            <td><input type="number" class="score-input front" data-hole="{{ i }}" /></td>
+          {% endfor %}
+          <td><span id="outTotal">0</span></td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th>Hole</th>
+          {% for i in range(10, 19) %}<th>{{ i }}</th>{% endfor %}
+          <th>IN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Score</td>
+          {% for i in range(10, 19) %}
+            <td><input type="number" class="score-input back" data-hole="{{ i }}" /></td>
+          {% endfor %}
+          <td><span id="inTotal">0</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="10">TOTAL</th>
+          <th><span id="grandTotal">0</span></th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button id="submitBtn" disabled>Submit Scores</button>
+
+    <div id="adminControls" style="display: none; margin-top: 1rem;">
+      <button id="simulateBtn">🧪 Simulate Full Round</button>
+      <button id="resetScoresBtn" style="color: red;">❌ Reset All Scores (Dev Only)</button>
+    
+<form id="exportForm" style="margin-top: 1rem;"><button type="button" id="exportBtn" class="home-button">📤 Export Scores to Excel</button></form><div id="exportProgress" style="margin-top: 10px; display: none;"><p>📤 Exporting scores... Please wait</p><progress value="0" max="100" id="exportBar" style="width: 100%;"></progress></div></div>    
+
+  <!-- Toast Notification -->
+  <div id="toast" style="visibility: hidden; position: fixed; bottom: 20px; right: 20px; max-width: 300px; background-color: #222; color: #fff; padding: 15px; border-radius: 8px; font-size: 0.95rem; z-index: 1000; opacity: 0; transition: opacity 0.5s ease-in-out; white-space: pre-wrap; line-height: 1.4;"></div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/awesomplete.min.js') }}"></script>
+
+  <div class="home-button-container">
+    <a href="/" class="home-button">🏠 Back to Home</a>
+
+    <!-- Export Button
+    <form id="exportForm">
+      <button type="button" id="exportBtn" class="home-button">📤 Export Scores to Excel</button>
+    </form>
+        <progress value="0" max="100" id="exportBar" style="width: 100%;"></progress>
+      </div> -->
+
+  <!-- Export Progress Display -->
+  <div id="exportProgress" style="margin-top: 10px; display: none;">
+    <p>📤 Exporting scores... Please wait</p>
+    <progress value="0" max="100" id="exportBar" style="width: 100%;"></progress>
+  </div>
+
+    <form id="tourneyRunner" enctype="multipart/form-data">
+      <input type="hidden" id="courseName" name="course_name" value="{{ course_name }}">
+      <input type="hidden" id="courseDate" name="course_date" value="{{ course_date }}">
+      <input type="hidden" id="coursePar" value="{{ course_par }}">
+      <button type="button" id="runScriptsBtn" class="home-button">🏌️‍♂️ Run Scripts</button>
+    </form>
+  </div>
+
+  <div id="spinner" style="display: none;">⏳ Running scripts...</div>
+  <div id="output"></div>
+  </div> <!-- ✅ Close .scorecard here -->
+
+  <!-- ✅ Load last -->
+  <script src="{{ url_for('static', filename='js/tournament-runner.js') }}"></script>
+  <script>
+    console.log("✅ tournament-runner.js loaded");
+  </script>
+  <script src="{{ url_for('static', filename='js/scorecard.js') }}"></script>
+
+  
+
+  
+
+
+<!-- Admin Toggle Button -->
+<div style="width: 100%; text-align: left; padding: 0 0 10px 10px;">
+  
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const adminControls = document.getElementById("adminControls");
+    if (adminControls) adminControls.style.display = "none";
+    document.addEventListener("keydown", function (event) {
+      if (event.shiftKey && event.key.toLowerCase() === "a") {
+        if (adminControls) {
+          const isVisible = adminControls.style.display === "block";
+          adminControls.style.display = isVisible ? "none" : "block";
+          console.log("🔑 Admin controls toggled by Shift + A");
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+

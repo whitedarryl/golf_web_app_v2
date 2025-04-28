@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Golf Score Calculator</title>
+
+  <!-- ✅ Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Satisfy&display=swap" rel="stylesheet">
+
+  <!-- ✅ App-specific stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/scorecard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/awesomplete.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  
+  <style>
+    body {
+      animation: fadeInBg 1.5s ease-in;
+    }
+    @keyframes fadeInBg {
+      from {
+        background-color: #fff;
+        opacity: 0.2;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<!-- ✅ Background image -->
+<body style="
+  background-image: url('{{ url_for('static', filename='images/scorecard-bg.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+">
+
+  <div class="scorecard">
+    <h1>🏌️ Tony G's {{ course_name }} Tournament</h1>
+    {% if course_date %}
+      <p class="course-date">{{ course_date }}</p>
+    {% endif %}
+
+    <div class="player-row">
+      <label for="playerName">Player:</label>
+      <input id="playerName" placeholder="Start typing a name..." autocomplete="off" />
+      <span id="progress" class="progress-text">
+        {{ submitted_count }} of {{ total_count }} players submitted |
+        <strong class="players-left">✔️ {{ players_left }} left</strong>
+      </span>
+      
+      <div id="progress-bar"></div>
+    </div>
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Hole</th>
+          {% for i in range(1, 10) %}
+            <th>{{ i }}</th>
+          {% endfor %}
+          <th>OUT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Score</td>
+          {% for i in range(1, 10) %}
+            <td><input type="number" class="score-input front" data-hole="{{ i }}" /></td>
+          {% endfor %}
+          <td><span id="outTotal">0</span></td>
+        </tr>
+      </tbody>
+
+      <thead>
+        <tr>
+          <th>Hole</th>
+          {% for i in range(10, 19) %}
+            <th>{{ i }}</th>
+          {% endfor %}
+          <th>IN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Score</td>
+          {% for i in range(10, 19) %}
+            <td><input type="number" class="score-input back" data-hole="{{ i }}" /></td>
+          {% endfor %}
+          <td><span id="inTotal">0</span></td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <th colspan="10">TOTAL</th>
+          <th><span id="grandTotal">0</span></th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button id="submitBtn" disabled>Submit Scores</button>
+  </div>
+
+  <!-- ✅ JS -->
+  <script src="{{ url_for('static', filename='js/scorecard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/awesomplete.min.js') }}"></script>
+  <script>
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+  
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+  </script>  
+
+  <div id="toast" class="toast-message" style="display: none;"></div>
+</body>
+</html>
