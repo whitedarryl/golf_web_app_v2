@@ -1,0 +1,52 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const playerInput = document.getElementById("playerName");
+  const scoreInputs = document.querySelectorAll(".score-input");
+  const submitButton = document.getElementById("submitBtn");
+  const outTotal = document.getElementById("outTotal");
+  const inTotal = document.getElementById("inTotal");
+  const grandTotal = document.getElementById("grandTotal");
+
+  function calculateTotal(className, outputElement) {
+    const inputs = document.querySelectorAll(`.score-input.${className}`);
+    let total = 0;
+    inputs.forEach((input) => {
+      const value = parseInt(input.value);
+      if (!isNaN(value)) {
+        total += value;
+      }
+    });
+    outputElement.textContent = total;
+    return total;
+  }
+
+  function updateTotals() {
+    const out = calculateTotal("front", outTotal);
+    const back = calculateTotal("back", inTotal);
+    grandTotal.textContent = out + back;
+  }
+
+  if (scoreInputs.length) {
+    scoreInputs.forEach((input) => {
+      input.addEventListener("input", updateTotals);
+    });
+  }
+
+  if (playerInput && scoreInputs.length && submitButton) {
+    submitButton.disabled = true;
+
+    function checkFormValidity() {
+      const nameValid = playerInput.value.trim().length > 0;
+      const scoresFilled = Array.from(scoreInputs).some(
+        (input) => input.value.trim() !== ""
+      );
+      submitButton.disabled = !(nameValid && scoresFilled);
+    }
+
+    playerInput.addEventListener("input", checkFormValidity);
+    scoreInputs.forEach((input) => {
+      input.addEventListener("input", checkFormValidity);
+    });
+  }
+
+  // 🧹 CLEANED: Removed duplicate tourneyRunner submit logic
+});
