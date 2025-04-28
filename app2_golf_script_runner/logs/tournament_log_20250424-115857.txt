@@ -1,0 +1,117 @@
+>>> convert_and_import_all.py started
+[ARGS] ['C:\\Golf Web App Clone\\app2_golf_script_runner\\convert_and_import_all.py', 'Downingtown', 'April 24, 2025']
+Fives table truncated successfully.
+
+>> Running convert_xlsx_to_csv.py
+
+-- STDOUT --
+Columns found: ['first_name', 'last_name', 'Hole', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', 'total', 'Column1', 'Column2', 'Column3', 'Column4', 'Column5', 'Column6', 'Column7', 'Column8', 'Column9', 'Column10', 'Column11', 'Column12', 'Column13', 'Column14', 'Column15', 'Column16', 'Column17', 'Column18', 'Column19', 'Column20', 'Column21', 'Column22', 'Column23', 'net_score']
+First 10 rows:
+   first_name  last_name      Hole     1  ...  Column21  Column22  Column23  net_score
+0    XXXXXXXX   XXXXXXXX       Par   4.0  ...       NaN       NaN       NaN          0
+1  First Name  Last Name  Handicap  11.0  ...    #N/A22    #N/A23       0.0  Net Score
+2        Mark   Albright       NaN   4.0  ...        21         0      21.0         67
+3         Tom      Ansel       NaN   5.0  ...        21        -2      19.0         67
+4        Bill    Bagnell       NaN   5.0  ...       NaN         1      19.0         65
+5        Mike     Barlow       NaN   5.0  ...        48         2      50.0         65
+6         Bob    Barnaba       NaN   5.0  ...        25        -1      24.0         68
+7       Brian  Behringer       NaN   4.0  ...       NaN         0      14.0         64
+8       Shawn  Blackburn       NaN   6.0  ...        45        -2      43.0         68
+9        Jack     Blozis       NaN   5.0  ...      22.5        -2      21.0         65
+
+[10 rows x 46 columns]
+Sanitized columns: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Sample names:   first_name last_name
+0       Mark  Albright
+1        Tom     Ansel
+2       Bill   Bagnell
+3       Mike    Barlow
+4        Bob   Barnaba
+Converted Downingtown October 2023 Callaway scoring sheet.xls to C:\Golf Web App Clone\golf_scores.csv
+Data extraction completed successfully.
+
+
+-- STDERR --
+
+
+>> Running convert_xlsx_to_csv_handicap_ranks.py
+
+-- STDOUT --
+Extracted handicap ranks from Downingtown October 2023 Callaway scoring sheet.xls and saved to C:\Golf Web App Clone\handicap_ranks.csv
+
+
+-- STDERR --
+
+
+>> Running extract_handicap_order.py
+
+-- STDOUT --
+Columns in CSV: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Extracted Handicap Columns: []
+Handicap to Hole Mapping: {}
+Final Handicap DataFrame:
+Empty DataFrame
+Columns: [Handicap Rank, Hole Number]
+Index: []
+
+
+-- STDERR --
+
+
+>> Running import_golf_scores.py
+
+-- STDOUT --
+Loading file from: C:\Golf Web App Clone\golf_scores.csv
+Columns found: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Name column preview:
+  first_name  last_name
+0       Mark   Albright
+1        Tom      Ansel
+2       Bill    Bagnell
+3       Mike     Barlow
+4        Bob    Barnaba
+5      Brian  Behringer
+6      Shawn  Blackburn
+7       Jack     Blozis
+8    Shannon      Brown
+9     Mike P    Carroll
+Clearing existing scores...
+Import completed successfully. Total rows inserted: 68
+
+
+-- STDERR --
+
+
+>> Running archive_scores_snapshot.py
+
+-- STDOUT --
+Archiving scores...
+Created new course_id: 6 for 'Downingtown'
+Created course_snapshot ID: 7
+Archived 68 scores
+Skipping handicap archive — table not found.
+Archiving complete.
+
+
+-- STDERR --
+
+
+>> Running import_handicap_ranks.py
+
+-- STDOUT --
+Course already exists with ID: 6. Skipping course insertion.
+Handicap ranks imported successfully for course ID: 6
+
+
+-- STDERR --
+
+
+>> Running fives_import.py
+
+-- STDOUT --
+Importing data from: Downingtown 10-19-24
+
+SUCCESS: Data from Downingtown 10-19-24 imported into 'fives' table.
+
+
+-- STDERR --

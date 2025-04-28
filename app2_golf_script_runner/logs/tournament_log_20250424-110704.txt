@@ -1,0 +1,117 @@
+>>> convert_and_import_all.py started
+[ARGS] ['C:\\Golf Web App Clone\\app2_golf_script_runner\\convert_and_import_all.py', 'Rock Manor', 'April 24, 2025']
+Fives table truncated successfully.
+
+>> Running convert_xlsx_to_csv.py
+
+-- STDOUT --
+Columns found: ['first_name', 'last_name', 'Hole', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', 'total', 'Column1', 'Column2', 'Column3', 'Column4', 'Column5', 'Column6', 'Column7', 'Column8', 'Column9', 'Column10', 'Column11', 'Column12', 'Column13', 'Column14', 'Column15', 'Column16', 'Column17', 'Column18', 'Column19', 'Column20', 'Column21', 'Column22', 'Column23', 'net_score']
+First 10 rows:
+   first_name  last_name      Hole     1  ...  Column21  Column22  Column23  net_score
+0    XXXXXXXX   XXXXXXXX       Par   5.0  ...       NaN       NaN       NaN          0
+1  First Name  Last Name  Handicap  15.0  ...    #N/A22    #N/A23       0.0  Net Score
+2     Padraig       Hahn       NaN   5.0  ...        27         2      29.0         61
+3        Mark   Albright       NaN   5.0  ...       NaN        -2      14.0         62
+4        Mike       Buri       NaN   5.0  ...       NaN         2      18.0         62
+5         Rob   Dietrich       NaN   5.0  ...       NaN         2      12.0         63
+6        Bert       Hahn       NaN   4.0  ...       NaN        -2      13.0         63
+7        Pete   Machorro       NaN   6.0  ...       NaN         0      15.0         63
+8        Dave       Cera       NaN   6.0  ...       NaN         1      16.0         63
+9       Clyde     Harmes       NaN   5.0  ...       NaN         1      16.0         63
+
+[10 rows x 46 columns]
+Sanitized columns: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Sample names:   first_name last_name
+0    Padraig      Hahn
+1       Mark  Albright
+2       Mike      Buri
+3        Rob  Dietrich
+4       Bert      Hahn
+Converted Rock Manor November 2023 Callaway scoring sheet.xls to C:\Golf Web App Clone\golf_scores.csv
+Data extraction completed successfully.
+
+
+-- STDERR --
+
+
+>> Running convert_xlsx_to_csv_handicap_ranks.py
+
+-- STDOUT --
+Extracted handicap ranks from Rock Manor November 2023 Callaway scoring sheet.xls and saved to C:\Golf Web App Clone\handicap_ranks.csv
+
+
+-- STDERR --
+
+
+>> Running extract_handicap_order.py
+
+-- STDOUT --
+Columns in CSV: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Extracted Handicap Columns: []
+Handicap to Hole Mapping: {}
+Final Handicap DataFrame:
+Empty DataFrame
+Columns: [Handicap Rank, Hole Number]
+Index: []
+
+
+-- STDERR --
+
+
+>> Running import_golf_scores.py
+
+-- STDOUT --
+Loading file from: C:\Golf Web App Clone\golf_scores.csv
+Columns found: ['first_name', 'last_name', 'total', 'net_score', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+Name column preview:
+  first_name last_name
+0    Padraig      Hahn
+1       Mark  Albright
+2       Mike      Buri
+3        Rob  Dietrich
+4       Bert      Hahn
+5       Pete  Machorro
+6       Dave      Cera
+7      Clyde    Harmes
+8      Steve     Haley
+9     Mike A   Carroll
+Clearing existing scores...
+Import completed successfully. Total rows inserted: 73
+
+
+-- STDERR --
+
+
+>> Running archive_scores_snapshot.py
+
+-- STDOUT --
+Archiving scores...
+Created new course_id: 4 for 'Rock Manor'
+Created course_snapshot ID: 4
+Archived 73 scores
+Skipping handicap archive — table not found.
+Archiving complete.
+
+
+-- STDERR --
+
+
+>> Running import_handicap_ranks.py
+
+-- STDOUT --
+Course already exists with ID: 4. Skipping course insertion.
+Handicap ranks imported successfully for course ID: 4
+
+
+-- STDERR --
+
+
+>> Running fives_import.py
+
+-- STDOUT --
+Importing data from: Rock Manor 2024
+
+SUCCESS: Data from Rock Manor 2024 imported into 'fives' table.
+
+
+-- STDERR --

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Run Tournament Scripts</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    #progressBar {
+      width: 100%;
+      background-color: #eee;
+      margin: 20px 0;
+    }
+    #progressBar div {
+      height: 30px;
+      width: 0%;
+      background-color: #134a2d;
+      color: white;
+      text-align: center;
+      line-height: 30px;
+      transition: width 1s ease;
+    }
+    #spinner {
+      display: none;
+      margin-top: 20px;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: #f4fff4;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2 class="form-title">Run Tournament Scripts</h2>
+    <form id="scriptForm">
+      <div class="form-group">
+        <label for="course_name">Course Name:</label>
+        <input type="text" id="course_name" name="course_name" required>
+      </div>
+      <div class="form-group">
+        <label for="course_date">Course Date:</label>
+        <input type="date" id="course_date" name="course_date" required>
+      </div>
+      <button type="submit" id="submitBtn" class="submit-btn">🏌️‍♂️ Run Scripts</button>
+    </form>
+
+    <div id="spinner">⏳ Running scripts...</div>
+    <div id="progressBar"><div></div></div>
+    <div id="output"></div>
+  </div>
+
+  <script src="/static/js/tournament-runner.js"></script>
+
+</body>
+</html>
