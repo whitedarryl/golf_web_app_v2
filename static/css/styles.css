@@ -1,0 +1,118 @@
+/* ======================================
+   Base Styles
+====================================== */
+@font-face {
+    font-family: 'Satisfy';
+    src: url('../fonts/Satisfy-Regular.woff2') format('woff2');
+  }
+  body {
+    font-family: 'Satisfy', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #333;
+  }
+  
+  /* ======================================
+     Header and Title
+  ====================================== */
+  .header-wrapper {
+    background: #ffffffcc;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 30px auto;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+  }
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #134a2d;
+  }
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: #333;
+    font-style: italic;
+  }
+  
+  /* ======================================
+     Leaderboard Cards and Tables
+  ====================================== */
+  .leaderboard-card {
+    background: #ffffffcc;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 30px auto;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 960px;
+  }
+  .themed-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+  }
+  .themed-table th,
+  .themed-table td {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  .themed-table th {
+    background-color: #134a2d;
+    color: white;
+  }
+  .even-row {
+    background-color: #f9f9f9;
+  }
+  .player-name-with-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tie-badge {
+    font-size: 0.8rem;
+    padding: 0.2em 0.6em;
+    border-radius: 999px;
+    font-weight: bold;
+    color: white;
+  }
+  .tie-badge-1 { background-color: #4caf50; }
+  .tie-badge-2 { background-color: #ffc107; color: black; }
+  .tie-badge-3 { background-color: #f44336; }
+  .tie-badge-4 { background-color: #2196f3; }
+  .tie-badge-5 { background-color: #9c27b0; }
+  
+  /* ======================================
+     Buttons
+  ====================================== */
+  .home-button-container {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .home-button {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    color: #333;
+    font-size: 1rem;
+    font-family: 'Satisfy', cursive;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin: 0 0.5rem;
+  }
+  .home-button:hover {
+    background-color: #ddd;
+    color: #000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  
