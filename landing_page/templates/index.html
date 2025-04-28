@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Tony G's Super Sick3 Tournament{% endblock %}
+
+{% block content %}
+<div class="course-bg">
+  <div class="dashboard-container">
+
+    <!-- <h1 class="page-title">Tony G's Super Sick2 Tournament</h1> -->
+    <h1 class="page-title">Tony G's {{ course_name }} Tournament</h1>
+    <p class="course-date">{{ course_date }}</p>
+
+    <div class="card-list">
+      <a class="app-card" href="/golf_score_calculator">
+        <span class="emoji">⛳</span> Golf Score Calculator
+      </a>
+      <a class="app-card" href="/callaway_results">
+        <span class="emoji">📊</span> Callaway Results
+      </a>
+      <a class="app-card" href="/five_results">
+        <span class="emoji">🎯</span> Five Results
+      </a>
+      <a class="app-card" href="/historical_data">
+        <span class="emoji">📚</span> Historical Data
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

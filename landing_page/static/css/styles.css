@@ -1,0 +1,168 @@
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  font-family: 'Patrick Hand SC', cursive;
+  background-image: url('../images/golf_course.jpg');
+  color: #222;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4;
+}
+
+.dashboard-container {
+  background: rgba(255, 255, 255, 0.88);
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 2rem 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Satisfy', cursive;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  transition: text-shadow 0.3s ease;
+}
+
+h1:hover {
+  text-shadow: 1px 2px 4px rgba(0,0,0,0.25);
+}
+
+.date,
+.course-date {
+  font-family: 'Satisfy', cursive;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.player-row {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-list {
+  background: #ffffffcc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-card {
+  display: inline-flex;
+  font-family: 'Satisfy', cursive;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  height: 56px; /* Boost height too */
+  width: 300px; /* Slightly wider buttons */
+  max-width: 90vw;
+  background: linear-gradient(145deg, #2ecc71, #27ae60);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px; /* MATCH the container */
+  text-decoration: none;
+  font-weight: bold;
+  min-width: 180px;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.app-card:hover {
+  animation: pulse 0.3s ease-in-out;
+  background: linear-gradient(145deg, #27ae60, #1e8449);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.app-card i, .app-card svg, .app-card img {
+  margin-right: 0.6rem;
+}
+
+.scorecard {
+  background-color: rgba(255, 255, 255, 0.95);
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 3rem 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .card-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app-card {
+    width: 80%;
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.emoji {
+  display: inline-block;
+  margin-right: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .emoji {
+  transform: rotate(-10deg) scale(1.2);
+}
+
+.card-container {
+  max-width: 400px;
+  margin: 40px auto 40px;
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 20px 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  height: 60%;
+  padding-top: 10px; /* Adjust padding to move the title up */
+}
+
+.card-container h1 {
+  font-family: 'CustomFont', cursive;
+  font-size: 1.8rem;
+  margin: -5px 0 8px 0; /* Adjust margin-top to move it up */
+  padding-top: 5px; /* Optional: Adjust padding if needed */
+}
+
+.course-date {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-family: 'CustomFont', cursive;
+  color: #2c3e50;
+}
+
+.icon {
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
