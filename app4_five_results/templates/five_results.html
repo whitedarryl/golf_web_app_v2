@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tony G's Five-Five-Five Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="course-bg">
+
+  <!-- 🧊 Consistent Header -->
+  <div class="header-wrapper">
+    <h1 class="page-title">Tony G’s {{ course_name }} Leaderboard</h1>
+    <p class="page-subtitle">{{ course_date }}</p>
+  </div>
+
+  <!-- 🏆 Full Leaderboard Content -->
+  <div class="leaderboard-card">
+    {{ content|safe }}
+  </div>
+
+  <!-- 🔧 Scripts for collapsible sections -->
+  <script>
+    function toggleCollapse(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.collapse-icon');
+      content.classList.toggle('collapsed');
+      icon.textContent = content.classList.contains('collapsed') ? '▶️' : '🔽';
+    }
+
+    function toggleAll(expand = true) {
+      const contents = document.querySelectorAll('.collapsible-content');
+      const icons = document.querySelectorAll('.collapse-icon');
+      contents.forEach((content, idx) => {
+        if (expand) {
+          content.classList.remove('collapsed');
+          icons[idx].textContent = '🔽';
+        } else {
+          content.classList.add('collapsed');
+          icons[idx].textContent = '▶️';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

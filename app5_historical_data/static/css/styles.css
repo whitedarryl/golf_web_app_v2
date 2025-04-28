@@ -1,0 +1,352 @@
+/* ===== Date Styling (Under Title) ===== */
+h3 {
+    font-size: 32px !important;
+    color: #444;
+    text-align: center;
+}
+
+/* ===== Table Container (Narrower Width) ===== */
+.table-container {
+    width: 60%; /* 🔼 Reduced from 90% to 60% */
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    border: 4px solid #166534;
+}
+
+/* ===== Table Styling (Now Narrower) ===== */
+table {
+    width: 100%; /* Keep table full width within the narrower container */
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* ===== Table Header ===== */
+thead {
+    background-color: #166534;
+    color: #fff;
+    font-size: 28px;
+}
+
+th, td {
+    padding: 12px; /* 🔼 Reduced spacing */
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+/* ===== Adjusted Column Widths to Bring Data Closer ===== */
+th:nth-child(1), td:nth-child(1) { width: 10%; } /* Place */
+th:nth-child(2), td:nth-child(2) { width: 50%; } /* Name */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Total Score */
+th:nth-child(4), td:nth-child(4) { width: 20%; } /* Net Score (if applicable) */
+
+/* ===== Alternating Row Colors ===== */
+tbody tr:nth-child(even) {
+    background-color: #eaf7e4;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* ===== Score Styling ===== */
+.score {
+    font-weight: bold;
+    font-size: 28px;
+    color: #166534;
+}
+
+/* ===== Back to Home Button ===== */
+.back-home {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 20px 40px;
+    background-color: #166534;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.back-home:hover {
+    background-color: #134a2d;
+}
+
+body {
+    font-family: 'Satisfy', cursive, sans-serif;
+    background-image: url('../images/golf-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #111;
+}
+
+.page-title {
+    font-size: 1.9rem;
+    font-family: 'Satisfy', cursive;
+    font-weight: 600;
+    margin: 0 0 20px 0; /* ⬅️ Add bottom margin */
+    text-align: center;
+    color: #134a2d;
+  }  
+
+  .header-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    margin-bottom: 10px; /* ↓ from 20px */
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+  }  
+
+/* Optional: add a slight dark overlay for better text contrast */
+body::before {
+    content: "";
+    display: none;
+  }
+
+.section-header {
+    font-size: 32px;
+    color: #166534;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* stacks on small screens */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-card {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.6s ease-in-out;
+  }  
+
+  .form-group {
+    flex: 1;
+    min-width: 180px;
+  }
+
+.narrow-select {
+    width: 250px;
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 6px;
+}
+
+.table-container table th:nth-child(1),
+.table-container table td:nth-child(1) {
+    text-align: left;
+    width: 35%;  /* was 40% */
+}
+
+.table-container table th:nth-child(2),
+.table-container table td:nth-child(2) {
+    text-align: center;
+    width: 30%;  /* was 20% */
+}
+
+.table-container table th:nth-child(3),
+.table-container table td:nth-child(3) {
+    text-align: center;
+    width: 35%;  /* was 30% */
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.narrow-select {
+    min-width: 220px;
+  }
+  
+  .table-container h2,
+  .section-header {
+    text-align: center;
+    font-size: 2rem;
+    color: #134a2d;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.25rem;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #134a2d;
+    transform: translateY(-1px);
+  }
+
+  label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #134a2d;
+  }
+
+  .submit-btn {
+    background-color: #166534;
+    font-size: 1rem;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px 20px 20px;
+  }
+
+  .inline-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    flex: 1;
+  }  
+  
+  .inline-group label {
+    white-space: nowrap;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100px;
+  }
+
+  .form-button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .submit-btn {
+    background-color: #166534;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-family: 'Satisfy', cursive;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #134a2d;
+  }
+  
+  .leaderboard-card {
+    margin-top: 20px; /* ⬅️ Much tighter */
+    margin-bottom: 40px;
+    padding: 30px 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .score-history-title {
+    color: #166534 !important; /* same green used elsewhere */
+    text-align: center;
+  }
+
+  .themed-table th:first-child {
+    width: 45%;
+  }
+
+  .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .btn-outline {
+    padding: 10px 18px;
+    font-size: 1rem;
+    border: 2px solid #166534;
+    background-color: white;
+    color: #166534;
+    font-family: 'Satisfy', cursive;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-outline:hover {
+    background-color: #166534;
+    color: white;
+  }
+
+  .themed-table th:nth-child(1),
+  .themed-table td:nth-child(1) {
+    width: 40%;
+    text-align: left;
+  }
+  
+  .themed-table th:nth-child(2),
+  .themed-table td:nth-child(2) {
+    width: 28%;
+    text-align: center;
+  }
+  
+  .themed-table th:nth-child(3),
+  .themed-table td:nth-child(3) {
+    width: 30%;
+    text-align: center;
+    white-space: nowrap; /* Prevent date wrapping */
+  }
+
+  th, td {
+    padding: 10px 8px;
+  }
+  

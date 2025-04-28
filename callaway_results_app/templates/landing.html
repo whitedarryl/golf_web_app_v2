@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Callaway Results</title>
+  <link rel="stylesheet" href="{{ url_for('callaway_results.static', filename='css/styles.css') }}">
+  
+</head>
+<body class="course-bg">
+
+  <div class="form-container">
+    <h2 class="form-title">Tony G's {{ course }} Callaway Leaderboard</h2>
+    <p style="text-align: center; font-size: 1.2rem; color: #444; margin-top: -10px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      <span style="font-size: 1.4rem;">📅</span>
+      <span>{{ date }}</span>
+    </p>    
+    <hr style="width: 60%; margin: 0 auto 30px; border: 0; border-top: 1px solid #ccc; opacity: 0.5;">
+
+    
+    <form method="post" action="{{ url_for('callaway_results.leaderboard') }}">
+      <div class="form-group">
+        <label for="total_positions">⛳ Total Score Positions:</label>
+        <input type="number" id="total_positions" name="total_positions" required value="5" />
+      </div>
+
+      <div class="form-group">
+        <label for="net_positions">🏌️ Net Score Positions:</label>
+        <input type="number" id="net_positions" name="net_positions" required value="5" />
+      </div>
+
+      <button type="submit" class="submit-btn">View Leaderboard</button>
+    </form>
+  </div>
+
+</body>
+</html>

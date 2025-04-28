@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('callaway_results.static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="header-wrapper">
+    <h1 class="page-title">🏌️ Tony G’s {{ course }} Leaderboard</h1>
+    <p class="page-subtitle">📅 {{ date }}</p>
+  </div>
+
+    <div class="leaderboard-card">
+      <h2><span class="icon">🏆</span> Top Players by Total Score</h2>
+      <table class="themed-table">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Player</th>
+            <th>Total Score</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for player in total_results %}
+            <tr class="{{ 'even-row' if loop.index % 2 == 0 }}">
+              <td>{{ loop.index }}</td>
+              <td>
+                <span class="player-name-with-check">
+                  <span class="player-name">{{ player.first_name }} {{ player.last_name }}</span>
+                  {% if (player.first_name, player.last_name) in total_tiebreaks %}
+                    <span class="tie-badge tie-badge-{{ total_tiebreaks[(player.first_name, player.last_name)] }}"
+                          title="Tiebreak Rank">
+                      {{ total_tiebreaks[(player.first_name, player.last_name)] }}
+                    </span>
+                  {% endif %}
+                </span>
+              </td>
+              <td><strong>{{ player.total_score }}</strong></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="leaderboard-card">
+      <h2><span class="icon">⭐</span> Top Players by Net Score</h2>
+      <table class="themed-table">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Player</th>
+            <th>Total Score</th>
+            <th>Net Score</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for player in net_results %}
+            <tr class="{{ 'even-row' if loop.index % 2 == 0 }}">
+              <td>{{ loop.index }}</td>
+              <td>
+                <span class="player-name-with-check">
+                  <span class="player-name">{{ player.first_name }} {{ player.last_name }}</span>
+                  {% if (player.first_name, player.last_name) in net_tiebreaks %}
+                    <span class="tie-badge tie-badge-{{ net_tiebreaks[(player.first_name, player.last_name)] }}"
+                          title="Tiebreak Rank">
+                      {{ net_tiebreaks[(player.first_name, player.last_name)] }}
+                    </span>
+                  {% endif %}
+                </span>
+              </td>
+              <td>{{ player.total_score }}</td>
+              <td><strong>{{ player.net_score }}</strong></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  <div class="home-button-container">
+    <a href="http://127.0.0.1:5000/five_results/" class="home-button">📝 View Five Results</a>
+  </div>  
+</body>
+</html>

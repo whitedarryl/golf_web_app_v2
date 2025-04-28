@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tony G’s Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('callaway_results.static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+</head>
+<body class="course-bg">
+
+  <div class="glass-panel">
+    <h1 class="leaderboard-title">Tony G’s {{ course.course_name }} Leaderboard</h1>
+    <p class="leaderboard-date">📅 {{ course.date_played }}</p>
+    <hr style="width: 60%; margin: 0 auto 30px; border: 0; border-top: 1px solid #ccc; opacity: 0.5;">
+
+    <!-- TOTAL SCORE SECTION -->
+    <div class="leaderboard-card">
+      <h2 class="collapsible-header">
+        <span class="icon">🏆</span>
+        Top Players by <span class="highlight orange">Total Score</span>
+      </h2>
+      <div>
+        <table class="themed-table">
+          <thead>
+            <tr><th>Place</th><th>Name</th><th>Total Score</th></tr>
+          </thead>
+          <tbody>
+            {% for player in total_results %}
+            <tr class="{{ loop.index % 2 == 0 and 'even-row' or '' }}">
+              <td>{{ loop.index }}</td>
+              <td>
+                <span class="player-name-with-check">
+                  {{ player.first_name }} {{ player.last_name }}
+                  {% set current_score = player.total_score %}
+                  {% set tie_group = total_results | selectattr("total_score", "equalto", current_score) | list %}
+                  {% if tie_group|length > 1 %}
+                  {% set tie_rank = 0 %}
+                  {% for p in tie_group %}
+                    {% if p.first_name == player.first_name and p.last_name == player.last_name %}
+                      {% set tie_rank = loop.index %}
+                    {% endif %}
+                  {% endfor %}                  
+                    <span class="tie-badge tie-badge-{{ tie_rank if tie_rank <= 5 else '' }}" title="Tiebreak Rank">{{ tie_rank }}</span>
+                  {% endif %}
+                </span>
+              </td>
+              <td><strong>{{ player.total_score }}</strong></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NET SCORE SECTION -->
+    <div class="leaderboard-card">
+      <h2 class="collapsible-header">
+        <span class="icon">⭐</span>
+        Top Players by <span class="highlight green">Net Score</span>
+      </h2>
+      <div>
+        <table class="themed-table">
+          <thead>
+            <tr><th>Place</th><th>Name</th><th>Total Score</th><th>Net Score</th></tr>
+          </thead>
+          <tbody>
+            {% for player in net_results %}
+            <tr class="{{ loop.index % 2 == 0 and 'even-row' or '' }}">
+              <td>{{ loop.index }}</td>
+              <td>
+                <span class="player-name-with-check">
+                  {{ player.first_name }} {{ player.last_name }}
+                  {% set current_score = player.net_score %}
+                  {% set tie_group = net_results | selectattr("net_score", "equalto", current_score) | list %}
+                  {% if tie_group|length > 1 %}
+                    {% set tie_rank = 0 %}
+                    {% for p in tie_group %}
+                      {% if p.first_name == player.first_name and p.last_name == player.last_name %}
+                        {% set tie_rank = loop.index %}
+                      {% endif %}
+                    {% endfor %}
+                    <span class="tie-badge tie-badge-{{ tie_rank if tie_rank <= 5 else '' }}" title="Tiebreak Rank">{{ tie_rank }}</span>
+                  {% endif %}                  
+                </span>
+              </td>
+              <td>{{ player.total_score }}</td>
+              <td><strong>{{ player.net_score }}</strong></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

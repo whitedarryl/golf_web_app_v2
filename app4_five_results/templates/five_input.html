@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Five-Five-Five Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="course-bg">
+
+  <div class="form-container">
+    <h2 class="form-title">Tony G's {{ course }} Five-Five-Five Leaderboard</h2>
+    <p style="text-align: center; font-size: 1.2rem; color: #444; margin-top: -10px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      <span style="font-size: 1.4rem;">📅</span>
+      <span>{{ date }}</span>
+    </p>    
+    <hr style="width: 60%; margin: 0 auto 30px; border: 0; border-top: 1px solid #ccc; opacity: 0.5;">
+
+    <form method="POST">
+      <div class="form-group">
+        <label for="juniors">🎯 Junior Prizes:</label>
+        <input type="number" id="juniors" name="juniors" required value="5" />
+      </div>
+
+      <div class="form-group">
+        <label for="seniors">🏌️ Seniors / Ladies Prizes:</label>
+        <input type="number" id="seniors" name="seniors" required value="5" />
+      </div>
+
+      <button type="submit" class="submit-btn">Generate Leaderboard</button>
+    </form>
+  </div>
+
+</body>
+</html>
